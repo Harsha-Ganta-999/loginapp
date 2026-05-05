@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Home</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f4f6fb;
+        min-height: 100vh;
+    }
+    nav {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        padding: 16px 32px;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    nav span { font-size: 18px; font-weight: 600; }
+    nav a { color: white; text-decoration: none; font-size: 14px; opacity: 0.85; }
+    .container {
+        max-width: 600px;
+        margin: 60px auto;
+        background: white;
+        border-radius: 16px;
+        padding: 40px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    h2 { color: #333; margin-bottom: 8px; }
+    p.subtitle { color: #888; margin-bottom: 28px; font-size: 14px; }
+    textarea {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 15px;
+        resize: vertical;
+        min-height: 140px;
+        outline: none;
+        font-family: inherit;
+    }
+    textarea:focus { border-color: #667eea; }
+    button {
+        margin-top: 16px;
+        width: 100%;
+        padding: 13px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+    button:hover { opacity: 0.9; }
+    .success {
+        background: #e0ffe0;
+        color: #27ae60;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span>Welcome, <span th:text="${username}"></span> 👋</span>
+  <a href="/login">Logout</a>
+</nav>
+
+<div class="container">
+  <h2>Share Your Suggestions</h2>
+  <p class="subtitle">We'd love to hear your feedback!</p>
+
+  <div th:if="${success}" class="success" th:text="${success}"></div>
+
+  <form method="post" action="/home">
+    <input type="hidden" name="username" th:value="${username}" />
+    <textarea name="message" placeholder="Write your suggestion here..." required></textarea>
+    <button type="submit">Submit Suggestion</button>
+  </form>
+</div>
+
+</body>
+</html>
